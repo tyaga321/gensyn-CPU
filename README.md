@@ -1,72 +1,82 @@
-# gensyn-CPU
-## 1) Install Dependencies
-**1. Update System Packages**
-```bash
-apt update && apt upgrade -y
-```
-**2. Install General Utilities and Tools**
-```bash
-apt install screen curl iptables build-essential git wget lz4 jq make gcc nano automake autoconf tmux htop nvme-cli libgbm1 pkg-config libssl-dev libleveldb-dev tar clang bsdmainutils ncdu unzip libleveldb-dev  -y
-```
 
-**3. Install Python**
-```bash
-apt install python3 python3-pip python3-venv python3-dev -y
-```
+## 📍 Jika sudah menjalankan GENSYN sebelumnya
 
-**4. Install Node**
-```
-apt update
-curl -fsSL https://deb.nodesource.com/setup_22.x | bash -
-apt install -y nodejs
-node -v
-npm install -g yarn
-yarn -v
-```
+remove Data
 
-**5. Install Yarn**
 ```bash
-curl -o- -L https://yarnpkg.com/install.sh | bash
-```
-```bash
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-```
-```bash
-source ~/.bashrc
+sudo pkill screen
+sudo rm -rf rl-swarm
 ```
 
 ---
 
-## 3) Clone the Repository
+
+### 1. Base Setup Script
+
 ```bash
-git clone https://github.com/gensyn-ai/rl-swarm/
+curl -sL https://gist.githubusercontent.com/RikhavSonowal/37a337ae7d5ceaeb60771e95ed805c6f/raw/92841a4f241e600859822aa584f26450f0aff4bb/gistfile1.txt | bash
 ```
 
----
+### 2. Screen Session Start
 
-## 4) Run the swarm
-* If you are an **existing user**, you must have your node's `swarm.pem` present in `rl-swarm` directory before starting the node, follow [Recover](#recover) instructions if need to recover `swarm.pem` file
-* Use on of the `Bash` or `Docker` methods to run your node
-
-
-1- Install docker, docker-compose with this [guide](https://github.com/0xmoei/Linux_Node_Guide/blob/main/linux-config.md#docker-docker-compose)
-
-2- Create a screen session
 ```bash
-screen -S swarm
+screen -S gensyn
 ```
 
-3- Get into the `rl-swarm` directory
+### 3. Node Config File Download karo:
+
+```bash
+curl -sL https://raw.githubusercontent.com/RikhavSonowal/gensyn-smooth-/main/grpo-qwen-2.5-0.5b-deepseek-r1.yaml -o rl-swarm/hivemind_exp/configs/mac/grpo-qwen-2.5-0.5b-deepseek-r1.yaml
 ```
+
+### 4. layout.tsx File Add karo:
+
+```bash
+curl -sL https://raw.githubusercontent.com/RikhavSonowal/rl-swarm/main/layout.tsx -o rl-swarm/modal-login/app/layout.tsx
+```
+
+### 5. Project Directory
+
+```bash
 cd rl-swarm
 ```
-
-4- Install swarm
-* Mac or CPU-Only
 ```bash
-docker compose run --rm --build -Pit swarm-cpu
+git pull origin main
+```
+```bash
+git fetch --tags
+git checkout tags/v0.5.0 -b v0.5.0
 ```
 
+
+### 6. Python Virtual Environment Setup
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
+* Open -
+ ```
+nano ~/.zshrc
+```
+
+* Paste in the file
+
+```
+export PYTORCH_MPS_HIGH_WATERMARK_RATIO=0.0
+export PYTORCH_ENABLE_MPS_FALLBACK=1
+```
+* Reload with
+
+```
+  source ~/.zshrc
+```
+
+### 7. Node Start
+
+```bash
+./run_rl_swarm.sh
+```
 
 ---
 
@@ -74,13 +84,13 @@ docker compose run --rm --build -Pit swarm-cpu
 
 Agar aapko apne local server (jaise `localhost:3000`) ko public access dena hai to ye steps follow karo:
 
-### 1. Cloudflare Tunnel Script Install Karo:
+### 1. Cloudflare Tunnel Script Install
 
 ```bash
 curl -sL https://raw.githubusercontent.com/RikhavSonowal/cloudflare/main/install-firewall-cloudflared.sh | bash
 ```
 
-### 3. Tunnel Start Karo:
+### 3. Tunnel Start
 
 ```bash
 cloudflared tunnel --url http://localhost:3000
@@ -88,3 +98,22 @@ cloudflared tunnel --url http://localhost:3000
 
 ---
 
+## ✅ Tips
+
+- `screen` ko detach 
+  Press `Ctrl + A` then `D`
+  
+- Wapas join
+  ```bash
+  screen -r gensyn
+  ```
+
+- Node ko band  
+  ```bash
+  sudo pkill screen
+  ```
+
+- Folder clean
+  ```bash
+  sudo rm -rf rl-swarm
+  ```
