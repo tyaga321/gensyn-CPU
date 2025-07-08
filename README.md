@@ -113,7 +113,7 @@ cloudflared tunnel --url http://localhost:3000
   sudo pkill screen
   ```
 
-- Folder clean
+
   ```bash
-  sudo rm -rf rl-swarm
+  rm /tmp/gensyn_last_line_status.txt
   ```
