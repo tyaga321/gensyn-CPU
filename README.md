@@ -112,7 +112,18 @@ cloudflared tunnel --url http://localhost:3000
   ```bash
   sudo pkill screen
   ```
-
+  ```bash
+  cd rl-swarm
+  ```
+  ```bash
+  rm -rf .venv
+  ```  
+```bash
+git switch main
+git reset --hard
+git clean -fd
+git pull origin main
+  ```  
 
   ```bash
   rm /tmp/gensyn_last_line_status.txt
