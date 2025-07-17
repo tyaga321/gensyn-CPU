@@ -132,7 +132,7 @@ git pull origin main
   nano /root/rl-swarm/patch_dht.py
   ```
  ```bash
-  import os
+import os
 import re
 
 # === Konfigurasi path ===
